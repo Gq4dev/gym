@@ -16,18 +16,44 @@ app.use('/api/routines', require('./routes/routines'));
 app.use('/api/assignments', require('./routes/assignments'));
 app.use('/api/my-routines', require('./routes/myRoutines'));
 
-// Endpoint para correr el seed en producción (protegido por SEED_SECRET)
-app.post('/api/admin/run-seed', async (req, res) => {
+// Middleware de autenticación por SEED_SECRET
+function checkSecret(req, res, next) {
   const secret = process.env.SEED_SECRET;
   if (!secret || req.headers['x-seed-secret'] !== secret) {
     return res.status(401).json({ error: 'No autorizado' });
   }
+  next();
+}
+
+// Endpoint para correr el seed de rutinas/ejercicios
+app.post('/api/admin/run-seed', checkSecret, async (req, res) => {
   try {
     const seedFn = require('./config/seeds/workout_data');
     await seedFn.seed(db);
     res.json({ ok: true, message: 'Seed ejecutado correctamente' });
   } catch (err) {
     console.error('Seed error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Endpoint para crear usuario admin (si no existe)
+app.post('/api/admin/create-admin', checkSecret, async (req, res) => {
+  try {
+    const bcrypt = require('bcryptjs');
+    const { username = 'admin', password = 'adminpass' } = req.body;
+    const existing = await db('users').where({ username }).first();
+    if (existing) {
+      // Actualiza la contraseña y el rol
+      const hash = await bcrypt.hash(password, 10);
+      await db('users').where({ username }).update({ password: hash, role: 'admin' });
+      return res.json({ ok: true, message: `Usuario '${username}' actualizado como admin` });
+    }
+    const hash = await bcrypt.hash(password, 10);
+    await db('users').insert({ username, password: hash, role: 'admin' });
+    res.json({ ok: true, message: `Usuario admin '${username}' creado` });
+  } catch (err) {
+    console.error('Create admin error:', err);
     res.status(500).json({ error: err.message });
   }
 });
