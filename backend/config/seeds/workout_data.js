@@ -2,8 +2,18 @@
  * Seed: MES 3 - Semana 1 y 2 (CICLO B)
  * duration = segundos de descanso entre series
  */
+
+// Helper: insert y devuelve el id (compatible SQLite y PostgreSQL)
+async function insertId(knex, table, data) {
+  const result = await knex(table).insert(data).returning('id');
+  const first = result[0];
+  return typeof first === 'object' && first !== null ? first.id : first;
+}
+
 exports.seed = async function (knex) {
+  // Borrar en orden correcto para respetar FK
   await knex('routine_exercises').del();
+  await knex('assignments').del();
   await knex('routines').del();
   await knex('exercises').del();
   await knex('categories').del();
@@ -15,8 +25,7 @@ exports.seed = async function (knex) {
     'Empuje', 'Jale', 'Gluteos', 'Metabolico',
   ];
   for (const name of categories) {
-    const [id] = await knex('categories').insert({ name });
-    catIds[name] = id;
+    catIds[name] = await insertId(knex, 'categories', { name });
   }
 
   // ── EJERCICIOS ───────────────────────────────────────────────────────────────
@@ -71,12 +80,11 @@ exports.seed = async function (knex) {
   ];
 
   for (const e of exercises) {
-    const [id] = await knex('exercises').insert({
+    ex[e.key] = await insertId(knex, 'exercises', {
       name: e.name,
       description: e.desc || null,
       category_id: catIds[e.cat],
     });
-    ex[e.key] = id;
   }
 
   // ── HELPER ───────────────────────────────────────────────────────────────────
@@ -95,7 +103,7 @@ exports.seed = async function (knex) {
   // ── RUTINAS ──────────────────────────────────────────────────────────────────
 
   // ─── SEMANA 1 / DIA 1 ───────────────────────────────────────────────────────
-  const [r_s1d1] = await knex('routines').insert({
+  const r_s1d1 = await insertId(knex, 'routines', {
     title: 'MES 3 - Semana 1 - DIA 1',
     notes: 'Ciclo B (09.02)',
   });
@@ -118,7 +126,7 @@ exports.seed = async function (knex) {
   ]);
 
   // ─── SEMANA 1 / DIA 2 ───────────────────────────────────────────────────────
-  const [r_s1d2] = await knex('routines').insert({
+  const r_s1d2 = await insertId(knex, 'routines', {
     title: 'MES 3 - Semana 1 - DIA 2',
     notes: 'Ciclo B (09.02)',
   });
@@ -143,7 +151,7 @@ exports.seed = async function (knex) {
   ]);
 
   // ─── SEMANA 1 / DIA 3 ───────────────────────────────────────────────────────
-  const [r_s1d3] = await knex('routines').insert({
+  const r_s1d3 = await insertId(knex, 'routines', {
     title: 'MES 3 - Semana 1 - DIA 3',
     notes: 'Ciclo B (09.02)',
   });
@@ -167,7 +175,7 @@ exports.seed = async function (knex) {
   ]);
 
   // ─── SEMANA 2 / DIA 1 ───────────────────────────────────────────────────────
-  const [r_s2d1] = await knex('routines').insert({
+  const r_s2d1 = await insertId(knex, 'routines', {
     title: 'MES 3 - Semana 2 - DIA 1',
     notes: 'Ciclo B (16.02)',
   });
@@ -189,7 +197,7 @@ exports.seed = async function (knex) {
   ]);
 
   // ─── SEMANA 2 / DIA 2 ───────────────────────────────────────────────────────
-  const [r_s2d2] = await knex('routines').insert({
+  const r_s2d2 = await insertId(knex, 'routines', {
     title: 'MES 3 - Semana 2 - DIA 2',
     notes: 'Ciclo B (16.02)',
   });
@@ -213,7 +221,7 @@ exports.seed = async function (knex) {
   ]);
 
   // ─── SEMANA 2 / DIA 3 ───────────────────────────────────────────────────────
-  const [r_s2d3] = await knex('routines').insert({
+  const r_s2d3 = await insertId(knex, 'routines', {
     title: 'MES 3 - Semana 2 - DIA 3',
     notes: 'Ciclo B (16.02) — Si no hiciste la semana 1, arranca x ahi',
   });
