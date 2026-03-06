@@ -2,6 +2,8 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
+import BarbellLogo from './BarbellLogo';
+
 export default function Navbar() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -15,7 +17,9 @@ export default function Navbar() {
 
   return (
     <nav className="navbar">
-      <span className="navbar-brand">GYM App</span>
+      <div className="navbar-brand" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <BarbellLogo width={24} height={24} color="#fff" />
+      </div>
       <div className="navbar-links">
         {user.role === 'admin' ? (
           <>

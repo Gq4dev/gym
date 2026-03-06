@@ -8,7 +8,7 @@ import React from 'react';
 export default function BarbellLogo({ size = 44 }) {
   return (
     <img
-      src="/barbell.png"
+      src="/barbell.svg"
       alt="Logo mancuerna"
       style={{ height: size, width: 'auto', display: 'block' }}
     />
