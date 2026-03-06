@@ -20,14 +20,16 @@ router.post('/', async (req, res) => {
   const { name, description, category_id, video_url } = req.body;
   if (!name) return res.status(400).json({ message: 'nombre requerido' });
   try {
-    const [id] = await db('exercises').insert({
+    const result = await db('exercises').insert({
       name,
       description: description || null,
       category_id: category_id || null,
       video_url: video_url || null,
-    });
-    res.status(201).json({ id, name, description, category_id, video_url });
-  } catch {
+    }).returning('id');
+    const newId = result[0]?.id || result[0];
+    res.status(201).json({ id: newId, name, description, category_id, video_url });
+  } catch (err) {
+    console.error('Error al crear ejercicio:', err);
     res.status(500).json({ message: 'Error al crear ejercicio' });
   }
 });

@@ -28,13 +28,15 @@ router.post('/', async (req, res) => {
     const user = await db('users').where({ id: user_id }).first();
     if (!user) return res.status(404).json({ message: 'Usuario no encontrado' });
 
-    const [id] = await db('assignments').insert({
+    const result = await db('assignments').insert({
       routine_id,
       user_id,
       due_date: due_date || null,
-    });
-    res.status(201).json({ id, routine_id, user_id, due_date });
-  } catch {
+    }).returning('id');
+    const newId = result[0]?.id || result[0];
+    res.status(201).json({ id: newId, routine_id, user_id, due_date });
+  } catch (err) {
+    console.error('Error al crear asignacion:', err);
     res.status(500).json({ message: 'Error al crear asignacion' });
   }
 });

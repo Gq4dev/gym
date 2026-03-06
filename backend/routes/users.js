@@ -30,9 +30,11 @@ router.post('/', async (req, res) => {
     if (existing) return res.status(409).json({ message: 'username en uso' });
 
     const hash = await bcrypt.hash(password, 10);
-    const [id] = await db('users').insert({ username, password: hash, role });
-    res.status(201).json({ id, username, role });
-  } catch {
+    const result = await db('users').insert({ username, password: hash, role }).returning('id');
+    const newId = result[0]?.id || result[0]; // handles differences between PG and SQLite returning formats
+    res.status(201).json({ id: newId, username, role });
+  } catch (err) {
+    console.error('Error al crear usuario:', err);
     res.status(500).json({ message: 'Error al crear usuario' });
   }
 });

@@ -30,9 +30,11 @@ router.post('/', async (req, res) => {
   const { title, notes } = req.body;
   if (!title) return res.status(400).json({ message: 'titulo requerido' });
   try {
-    const [id] = await db('routines').insert({ title, notes: notes || null });
-    res.status(201).json({ id, title, notes, exercises: [] });
-  } catch {
+    const result = await db('routines').insert({ title, notes: notes || null }).returning('id');
+    const newId = result[0]?.id || result[0];
+    res.status(201).json({ id: newId, title, notes, exercises: [] });
+  } catch (err) {
+    console.error('Error al crear rutina:', err);
     res.status(500).json({ message: 'Error al crear rutina' });
   }
 });
@@ -69,15 +71,17 @@ router.post('/:id/exercises', async (req, res) => {
     const routine = await db('routines').where({ id: req.params.id }).first();
     if (!routine) return res.status(404).json({ message: 'Rutina no encontrada' });
 
-    const [id] = await db('routine_exercises').insert({
+    const result = await db('routine_exercises').insert({
       routine_id: req.params.id,
       exercise_id,
       sets: sets || null,
       reps: reps || null,
       duration: duration || null,
-    });
-    res.status(201).json({ id, routine_id: Number(req.params.id), exercise_id, sets, reps, duration });
-  } catch {
+    }).returning('id');
+    const newId = result[0]?.id || result[0];
+    res.status(201).json({ id: newId, routine_id: Number(req.params.id), exercise_id, sets, reps, duration });
+  } catch (err) {
+    console.error('Error al agregar ejercicio:', err);
     res.status(500).json({ message: 'Error al agregar ejercicio' });
   }
 });

@@ -23,9 +23,11 @@ router.post('/', async (req, res) => {
     const existing = await db('categories').where({ name }).first();
     if (existing) return res.status(409).json({ message: 'Categoria ya existe' });
 
-    const [id] = await db('categories').insert({ name });
-    res.status(201).json({ id, name });
-  } catch {
+    const result = await db('categories').insert({ name }).returning('id');
+    const newId = result[0]?.id || result[0];
+    res.status(201).json({ id: newId, name });
+  } catch (err) {
+    console.error('Error al crear categoria:', err);
     res.status(500).json({ message: 'Error al crear categoria' });
   }
 });
