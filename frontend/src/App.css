@@ -867,18 +867,20 @@ body {
   inset: 0;
   background: rgba(0,0,0,0.75);
   display: flex;
-  align-items: flex-end;
+  align-items: center; /* cambiado de flex-end a center */
   justify-content: center;
   z-index: 100;
+  padding: 20px; /* para que no toque los bordes en pantallas completas */
 }
 
 .video-modal {
   background: #000;
   width: 100%;
   max-width: 480px;
-  border-radius: 20px 20px 0 0;
+  border-radius: 12px; /* bordes más redondeados en todos lados en vez de solo arriba */
   overflow: hidden;
   position: relative;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5); /* sombra para destacarlo */
 }
 
 .video-modal-close {
