@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env.local
+.env.production
+
+# SQLite (solo para dev local)
+backend/config/dev.sqlite3
+backend/dev.sqlite3
+
+# Build
+frontend/build/
+
+# Logs
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
