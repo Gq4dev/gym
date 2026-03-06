@@ -101,11 +101,11 @@ export default function WorkoutPage() {
   const completedCount = exercises.filter((ex, i) => (doneSets[i] || 0) >= (ex.sets || 1)).length;
   const progress = exercises.length > 0 ? Math.round((completedCount / exercises.length) * 100) : 0;
 
-  if (loading) return <div className="workout-loading">Cargando...</div>;
+  if (loading) return <div className="workout-loading">CARGANDO...</div>;
   if (error) return <div className="workout-loading">{error}</div>;
   if (exercises.length === 0) return (
     <div className="workout-loading">
-      <p>Esta rutina no tiene ejercicios.</p>
+      <p style={{ fontFamily: 'Rajdhani, sans-serif', color: '#999', letterSpacing: 1 }}>Esta rutina no tiene ejercicios.</p>
       <button className="btn-primary" onClick={() => navigate('/my-routines')}>Volver</button>
     </div>
   );
@@ -126,10 +126,21 @@ export default function WorkoutPage() {
 
   return (
     <div className="workout-screen">
-      <div className="workout-topbar">
-        <button className="workout-back" onClick={() => navigate('/my-routines')}>✕</button>
-        <span className="workout-title">{routineTitle}</span>
-        <span className="workout-elapsed">{formatTime(elapsed)}</span>
+      {/* Header estilo documento */}
+      <div className="workout-header">
+        <div className="workout-header-top">
+          <button className="workout-back" onClick={() => navigate('/my-routines')}>← VOLVER</button>
+          <div className="workout-elapsed-pill">{formatTime(elapsed)}</div>
+        </div>
+        <div className="workout-header-body">
+          <div className="workout-header-info">
+            <div className="workout-title">{routineTitle}</div>
+            <div className="workout-header-meta">
+              <span className="workout-header-chip">🏋️ {exercises.length} ejercicios</span>
+            </div>
+          </div>
+          <div className="workout-header-emoji">🏋️</div>
+        </div>
       </div>
 
       <div className="workout-progress-header">

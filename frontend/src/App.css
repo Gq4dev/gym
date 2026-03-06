@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&display=swap');
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -5,12 +7,14 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'Rajdhani', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   background: #f0f2f5;
   color: #222;
 }
 
-/* Navbar */
+/* =====================
+   NAVBAR (admin)
+   ===================== */
 .navbar {
   display: flex;
   align-items: center;
@@ -22,9 +26,10 @@ body {
 }
 
 .navbar-brand {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #e94560;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.3rem;
+  letter-spacing: 3px;
+  color: #a855f7;
   margin-right: 16px;
 }
 
@@ -45,8 +50,8 @@ body {
 
 .navbar-links a:hover,
 .navbar-links a.active {
-  background: rgba(255,255,255,0.1);
-  color: #fff;
+  background: rgba(168,85,247,0.15);
+  color: #a855f7;
 }
 
 .navbar-user {
@@ -58,17 +63,20 @@ body {
 }
 
 .navbar-user button {
-  background: #e94560;
+  background: #7c3aed;
   color: #fff;
   border: none;
   padding: 5px 14px;
   border-radius: 4px;
   cursor: pointer;
   font-size: 0.85rem;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  letter-spacing: 1px;
 }
 
 .navbar-user button:hover {
-  background: #c73652;
+  background: #6d28d9;
 }
 
 /* Layout */
@@ -84,28 +92,38 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f0f2f5;
+  background: #f8f7ff;
 }
 
 .auth-card {
   background: #fff;
   padding: 40px;
-  border-radius: 8px;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.1);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(124,58,237,0.1);
   width: 340px;
+  border: 1px solid #e8e4f0;
 }
 
 .auth-card h2 {
   text-align: center;
-  color: #e94560;
+  font-family: 'Bebas Neue', sans-serif;
+  color: #7c3aed;
+  font-size: 2rem;
+  letter-spacing: 4px;
   margin-bottom: 4px;
 }
 
 .auth-card h3 {
   text-align: center;
-  color: #555;
+  color: #aaa;
   font-weight: 400;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
+  font-family: 'Rajdhani', sans-serif;
+  letter-spacing: 3px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  border-top: 1px solid #ede9fe;
+  padding-top: 20px;
 }
 
 /* Forms */
@@ -118,6 +136,8 @@ body {
   font-size: 0.85rem;
   color: #666;
   margin-bottom: 4px;
+  font-family: 'Rajdhani', sans-serif;
+  letter-spacing: 1px;
 }
 
 .form-group input,
@@ -125,17 +145,20 @@ body {
 .form-group textarea {
   width: 100%;
   padding: 8px 12px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border: 1px solid #ddd8f0;
+  border-radius: 8px;
   font-size: 0.95rem;
   outline: none;
   transition: border-color 0.15s;
+  background: #f5f3ff;
+  color: #1a1a2e;
+  font-family: 'Rajdhani', sans-serif;
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-  border-color: #e94560;
+  border-color: #7c3aed;
 }
 
 .form-actions {
@@ -147,15 +170,19 @@ body {
 .card-form {
   background: #fff;
   padding: 24px;
-  border-radius: 8px;
-  box-shadow: 0 1px 8px rgba(0,0,0,0.07);
+  border-radius: 12px;
+  box-shadow: 0 1px 8px rgba(124,58,237,0.07);
   margin-bottom: 24px;
   max-width: 480px;
+  border: 1px solid #e8e4f0;
 }
 
 .card-form h3 {
   margin-bottom: 16px;
   color: #333;
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 2px;
+  font-size: 1.4rem;
 }
 
 .inline-form {
@@ -169,31 +196,38 @@ body {
 .inline-form input,
 .inline-form select {
   padding: 7px 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border: 1px solid #ddd8f0;
+  border-radius: 8px;
   font-size: 0.9rem;
   outline: none;
+  background: #f5f3ff;
+  color: #1a1a2e;
+  font-family: 'Rajdhani', sans-serif;
 }
 
 .inline-form input:focus,
 .inline-form select:focus {
-  border-color: #e94560;
+  border-color: #7c3aed;
 }
 
 /* Buttons */
 .btn-primary {
-  background: #e94560;
+  background: #7c3aed;
   color: #fff;
   border: none;
   padding: 8px 18px;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 0.9rem;
-  transition: background 0.15s;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+  transition: background 0.15s, transform 0.1s;
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: #c73652;
+  background: #6d28d9;
+  transform: translateY(-1px);
 }
 
 .btn-primary:disabled {
@@ -205,9 +239,11 @@ body {
   background: #dc3545;
   color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   transition: background 0.15s;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
 }
 
 .btn-danger:hover {
@@ -217,14 +253,16 @@ body {
 .btn-sm {
   padding: 4px 10px;
   font-size: 0.82rem;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
   border: 1px solid #ddd;
   transition: background 0.15s;
+  font-family: 'Rajdhani', sans-serif;
 }
 
 .btn-sm:hover {
-  background: #f5f5f5;
+  background: #f5f3ff;
+  border-color: #7c3aed;
 }
 
 .btn-full {
@@ -245,8 +283,10 @@ body {
 }
 
 .page-header h2 {
-  font-size: 1.5rem;
-  color: #222;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  letter-spacing: 3px;
+  color: #1a1a2e;
 }
 
 /* Table */
@@ -254,25 +294,30 @@ body {
   width: 100%;
   border-collapse: collapse;
   background: #fff;
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 1px 8px rgba(0,0,0,0.07);
+  box-shadow: 0 1px 8px rgba(124,58,237,0.07);
+  border: 1px solid #e8e4f0;
 }
 
 .data-table th {
   background: #1a1a2e;
-  color: #ccc;
+  color: #a855f7;
   text-align: left;
   padding: 12px 16px;
   font-size: 0.8rem;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
 }
 
 .data-table td {
   padding: 11px 16px;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0eeff;
   font-size: 0.9rem;
+  font-family: 'Rajdhani', sans-serif;
 }
 
 .data-table tbody tr:last-child td {
@@ -280,7 +325,7 @@ body {
 }
 
 .data-table tbody tr:hover {
-  background: #fafafa;
+  background: #faf8ff;
 }
 
 .actions {
@@ -295,11 +340,13 @@ body {
   border-radius: 12px;
   font-size: 0.78rem;
   font-weight: 600;
+  font-family: 'Rajdhani', sans-serif;
+  letter-spacing: 1px;
 }
 
 .badge-admin {
-  background: #fff0f3;
-  color: #e94560;
+  background: #f5f3ff;
+  color: #7c3aed;
 }
 
 .badge-user {
@@ -307,7 +354,7 @@ body {
   color: #1a6fc4;
 }
 
-/* Routine cards */
+/* Routine cards (admin) */
 .routine-list {
   display: flex;
   flex-direction: column;
@@ -316,9 +363,10 @@ body {
 
 .routine-card {
   background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 1px 8px rgba(0,0,0,0.07);
+  border-radius: 12px;
+  box-shadow: 0 1px 8px rgba(124,58,237,0.07);
   overflow: hidden;
+  border: 1px solid #e8e4f0;
 }
 
 .routine-card.overdue {
@@ -334,13 +382,15 @@ body {
 }
 
 .routine-card-header strong {
-  font-size: 1rem;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
   display: block;
 }
 
 .routine-exercises {
   padding: 0 20px 16px;
-  border-top: 1px solid #f0f0f0;
+  border-top: 1px solid #f0eeff;
 }
 
 .routine-exercises .data-table {
@@ -353,6 +403,7 @@ body {
   margin-top: 4px;
   font-size: 0.82rem;
   color: #888;
+  font-family: 'Rajdhani', sans-serif;
 }
 
 /* Utilities */
@@ -366,13 +417,14 @@ body {
 }
 
 .error-msg {
-  background: #fff0f3;
-  color: #c0392b;
-  border: 1px solid #f5c6cb;
-  border-radius: 4px;
+  background: #f5f3ff;
+  color: #7c3aed;
+  border: 1px solid #ddd8f0;
+  border-radius: 8px;
   padding: 8px 14px;
   margin-bottom: 16px;
   font-size: 0.9rem;
+  font-family: 'Rajdhani', sans-serif;
 }
 
 /* =====================
@@ -382,16 +434,40 @@ body {
 .mobile-page {
   max-width: 480px;
   margin: 0 auto;
-  padding: 20px 16px 32px;
+  padding: 0 0 32px;
+  background: #f8f7ff;
+  min-height: 100vh;
 }
 
-.mobile-header {
-  margin-bottom: 20px;
+/* Brand header */
+.mobile-brand-header {
+  padding: 20px 20px 16px;
+  background: #fff;
+  border-bottom: 1px solid #ede9fe;
 }
 
-.mobile-header h1 {
-  font-size: 1.6rem;
-  color: #1a1a2e;
+.mobile-brand-header .brand-sub {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 5px;
+  color: #a855f7;
+  line-height: 1;
+}
+
+.mobile-brand-header .brand-main {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  letter-spacing: 4px;
+  color: #7c3aed;
+  line-height: 1;
+}
+
+.mobile-brand-header .brand-date {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 12px;
+  color: #aaa;
+  letter-spacing: 1px;
+  margin-top: 4px;
 }
 
 .mobile-loading {
@@ -399,27 +475,50 @@ body {
   align-items: center;
   justify-content: center;
   height: 60vh;
-  color: #888;
-  font-size: 1rem;
+  color: #a855f7;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: 3px;
 }
 
 .mobile-empty {
   text-align: center;
   padding: 60px 20px;
-  color: #999;
+  color: #aaa;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 1px;
 }
 
+.mobile-section-label {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 12px;
+  color: #999;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 20px 20px 12px;
+}
+
+/* Routine cards (mobile) */
 .routine-cards-mobile {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 10px;
+  padding: 0 20px;
 }
 
 .routine-card-mobile {
   background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  border-radius: 12px;
+  border: 1px solid #e8e4f0;
+  box-shadow: 0 1px 6px rgba(124,58,237,0.05);
   overflow: hidden;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+
+.routine-card-mobile:hover {
+  box-shadow: 0 4px 16px rgba(124,58,237,0.12);
 }
 
 .routine-card-mobile.overdue {
@@ -427,64 +526,116 @@ body {
 }
 
 .routine-card-mobile-body {
-  padding: 18px 18px 12px;
+  padding: 16px 16px 12px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.routine-card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.routine-card-content {
+  flex: 1;
+  min-width: 0;
 }
 
 .routine-card-mobile-body h2 {
-  font-size: 1.1rem;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 1px;
   color: #1a1a2e;
+  line-height: 1.1;
   margin-bottom: 4px;
 }
 
 .mobile-notes {
-  font-size: 0.85rem;
-  color: #888;
-  margin-bottom: 10px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.82rem;
+  color: #999;
+  margin-bottom: 6px;
 }
 
 .routine-card-meta {
   display: flex;
-  gap: 12px;
-  font-size: 0.8rem;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.routine-card-meta .meta-chip {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  letter-spacing: 0.5px;
+}
+
+.routine-card-meta .meta-count {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 12px;
   color: #aaa;
-  margin-bottom: 12px;
+}
+
+.meta-overdue {
+  color: #dc3545;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 12px;
 }
 
 .exercise-preview {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 5px;
 }
 
 .exercise-chip {
-  background: #f0f2f5;
+  background: #f5f3ff;
   border-radius: 20px;
-  padding: 4px 10px;
-  font-size: 0.78rem;
-  color: #555;
+  padding: 3px 10px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.75rem;
+  color: #7c3aed;
+  border: 1px solid #ede9fe;
 }
 
 .chip-more {
-  background: #e8e8e8;
-  color: #888;
+  background: #ede9fe;
+  color: #a855f7;
+  border-color: #ddd8f0;
 }
 
 .btn-start {
   display: block;
   width: 100%;
-  padding: 14px;
-  background: #e94560;
+  padding: 16px;
+  background: #7c3aed;
   color: #fff;
   border: none;
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: 0.03em;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.35rem;
+  letter-spacing: 3px;
   cursor: pointer;
-  transition: background 0.15s;
+  transition: background 0.15s, transform 0.1s;
+  border-radius: 0 0 12px 12px;
 }
 
 .btn-start:hover:not(:disabled) {
-  background: #c73652;
+  background: #6d28d9;
+  transform: translateY(-1px);
+}
+
+.btn-start:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 .btn-start:disabled {
@@ -500,49 +651,99 @@ body {
   display: flex;
   flex-direction: column;
   height: 100dvh;
-  background: #f7f8fa;
+  background: #f8f7ff;
   max-width: 480px;
   margin: 0 auto;
 }
 
-.workout-topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 20px;
-  background: #1a1a2e;
-  color: #fff;
-  font-size: 0.9rem;
+.workout-header {
+  background: #fff;
+  border-bottom: 1px solid #ede9fe;
+  padding: 16px 20px 18px;
   flex-shrink: 0;
 }
 
+.workout-header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
 .workout-back {
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 1.2rem;
+  background: transparent;
+  border: 1px solid #ddd8f0;
+  color: #7c3aed;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: 2px;
   cursor: pointer;
-  padding: 4px 8px;
+  padding: 6px 14px;
+  border-radius: 8px;
   line-height: 1;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.workout-back:hover {
+  background: #f5f3ff;
+  border-color: #7c3aed;
+}
+
+.workout-elapsed-pill {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  color: #7c3aed;
+  font-variant-numeric: tabular-nums;
+  background: #f5f3ff;
+  border: 1px solid #ddd8f0;
+  padding: 4px 12px;
+  border-radius: 8px;
+}
+
+.workout-header-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.workout-header-info {
+  flex: 1;
+  min-width: 0;
 }
 
 .workout-title {
-  flex: 1;
-  text-align: center;
-  font-weight: 600;
-  padding: 0 8px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.7rem;
+  letter-spacing: 2px;
+  color: #7c3aed;
+  line-height: 1.1;
+  margin-bottom: 6px;
+  word-break: break-word;
 }
 
-.workout-elapsed {
-  font-size: 1rem;
-  font-weight: 700;
-  color: #e94560;
-  font-variant-numeric: tabular-nums;
-  min-width: 48px;
-  text-align: right;
+.workout-header-meta {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.workout-header-chip {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 12px;
+  background: #f5f3ff;
+  color: #a855f7;
+  padding: 3px 10px;
+  border-radius: 10px;
+  border: 1px solid #ede9fe;
+  letter-spacing: 0.5px;
+}
+
+.workout-header-emoji {
+  font-size: 2.4rem;
+  flex-shrink: 0;
 }
 
 /* progress header */
@@ -552,29 +753,30 @@ body {
   gap: 10px;
   padding: 10px 16px;
   background: #fff;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #ede9fe;
   flex-shrink: 0;
 }
 
 .workout-progress-bar {
   flex: 1;
-  height: 6px;
-  background: #e0e0e0;
+  height: 5px;
+  background: #ede9fe;
   border-radius: 3px;
   overflow: hidden;
 }
 
 .workout-progress-fill {
   height: 100%;
-  background: #e94560;
+  background: #7c3aed;
   border-radius: 3px;
   transition: width 0.4s ease;
 }
 
 .workout-progress-pct {
+  font-family: 'Rajdhani', sans-serif;
   font-size: 0.85rem;
   font-weight: 700;
-  color: #e94560;
+  color: #7c3aed;
   min-width: 36px;
   text-align: right;
 }
@@ -593,12 +795,15 @@ body {
   background: #fff;
   border-radius: 14px;
   padding: 16px;
-  box-shadow: 0 1px 8px rgba(0,0,0,0.07);
-  transition: opacity 0.2s;
+  box-shadow: 0 1px 6px rgba(124,58,237,0.06);
+  border: 1px solid #e8e4f0;
+  border-left: 3px solid #7c3aed;
+  transition: opacity 0.2s, border-color 0.3s;
 }
 
 .wk-ex-card.wk-ex-complete {
-  opacity: 0.55;
+  opacity: 0.5;
+  border-left-color: #059669;
 }
 
 .wk-ex-header {
@@ -615,14 +820,17 @@ body {
 }
 
 .wk-ex-name {
-  font-size: 1rem;
-  font-weight: 700;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.15rem;
+  letter-spacing: 1px;
   color: #1a1a2e;
 }
 
 .wk-ex-cat {
+  font-family: 'Rajdhani', sans-serif;
   font-size: 0.75rem;
   color: #aaa;
+  letter-spacing: 1px;
 }
 
 .wk-ex-actions {
@@ -636,7 +844,7 @@ body {
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: #1a1a2e;
+  background: #7c3aed;
   color: #fff;
   font-size: 0.75rem;
   display: flex;
@@ -650,7 +858,7 @@ body {
 }
 
 .wk-video-btn:hover {
-  background: #e94560;
+  background: #6d28d9;
 }
 
 /* video modal */
@@ -707,7 +915,7 @@ body {
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  background: #e94560;
+  background: #059669;
   color: #fff;
   font-size: 0.85rem;
   display: flex;
@@ -717,9 +925,10 @@ body {
 }
 
 .wk-ex-reps {
-  font-size: 0.82rem;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.85rem;
   color: #888;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 /* rep circles */
@@ -730,14 +939,15 @@ body {
 }
 
 .rep-circle {
-  width: 48px;
-  height: 48px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  border: 2px solid #ddd;
+  border: 2px solid #ddd8f0;
   background: #fff;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #bbb;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  color: #ccc;
   cursor: default;
   display: flex;
   align-items: center;
@@ -747,24 +957,24 @@ body {
 }
 
 .rep-circle.rep-done {
-  background: #e94560;
-  border-color: #e94560;
+  background: #7c3aed;
+  border-color: #7c3aed;
   color: #fff;
 }
 
 .rep-circle.rep-next {
-  border-color: #1a1a2e;
-  color: #1a1a2e;
+  border-color: #7c3aed;
+  color: #7c3aed;
   cursor: pointer;
-  box-shadow: 0 0 0 3px rgba(26,26,46,0.1);
+  box-shadow: 0 0 0 3px rgba(124,58,237,0.15);
 }
 
 .rep-circle.rep-next:active {
-  transform: scale(0.91);
+  transform: scale(0.88);
 }
 
 .rep-circle.rep-pending {
-  opacity: 0.35;
+  opacity: 0.3;
 }
 
 /* inline rest */
@@ -774,33 +984,48 @@ body {
   gap: 10px;
   margin-top: 12px;
   padding: 10px 14px;
-  background: #f0f2f5;
+  background: #f5f3ff;
+  border: 1px solid #7c3aed;
   border-radius: 10px;
+  animation: slideUp 0.2s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(8px); opacity: 0; }
+  to   { transform: translateY(0);   opacity: 1; }
 }
 
 .wk-rest-label {
-  font-size: 0.8rem;
-  color: #888;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  color: #a855f7;
 }
 
 .wk-rest-time {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #1a1a2e;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+  color: #7c3aed;
   font-variant-numeric: tabular-nums;
   flex: 1;
 }
 
 .wk-rest-skip {
-  background: #1a1a2e;
+  background: #7c3aed;
   color: #fff;
   border: none;
   border-radius: 8px;
   padding: 6px 14px;
-  font-size: 0.82rem;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
   cursor: pointer;
+  transition: background 0.15s;
+}
+
+.wk-rest-skip:hover {
+  background: #6d28d9;
 }
 
 /* done screen */
@@ -815,32 +1040,53 @@ body {
   text-align: center;
   max-width: 480px;
   margin: 0 auto;
+  background: #f8f7ff;
 }
 
 .workout-done-icon {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: #e94560;
+  background: #7c3aed;
   color: #fff;
   font-size: 2.4rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 0 30px rgba(124,58,237,0.3);
 }
 
 .workout-done h2 {
-  font-size: 1.8rem;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.2rem;
+  letter-spacing: 4px;
   color: #1a1a2e;
 }
 
 .workout-done p {
-  color: #888;
+  color: #999;
+  font-family: 'Rajdhani', sans-serif;
+  letter-spacing: 1px;
 }
 
 .workout-done-time {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #1a1a2e !important;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3rem !important;
+  letter-spacing: 4px;
+  color: #7c3aed !important;
   font-variant-numeric: tabular-nums;
+}
+
+.workout-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100dvh;
+  gap: 16px;
+  color: #a855f7;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: 3px;
+  background: #f8f7ff;
 }
