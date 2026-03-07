@@ -130,7 +130,7 @@ export default function RoutinesPage() {
             <button type="submit" className="btn-primary" disabled={saving}>
               {saving ? 'Guardando...' : editingId ? 'Actualizar' : 'Crear'}
             </button>
-            <button type="button" onClick={cancelForm}>Cancelar</button>
+            <button type="button" className="btn-secondary" onClick={cancelForm}>Cancelar</button>
           </div>
         </form>
       )}

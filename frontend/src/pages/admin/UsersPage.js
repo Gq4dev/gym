@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import api from '../../api/api';
 
 export default function UsersPage() {
@@ -8,6 +9,7 @@ export default function UsersPage() {
   const [form, setForm] = useState({ username: '', password: '', role: 'user' });
   const [showForm, setShowForm] = useState(false);
   const [saving, setSaving] = useState(false);
+  const navigate = useNavigate();
 
   const fetchUsers = async () => {
     try {
@@ -100,7 +102,15 @@ export default function UsersPage() {
             {users.map(u => (
               <tr key={u.id}>
                 <td>{u.id}</td>
-                <td>{u.username}</td>
+                <td>
+                  {u.role === 'user' ? (
+                    <button className="btn-text" onClick={() => navigate(`/admin/users/${u.id}`)} style={{ textDecoration: 'underline', color: '#4f46e5', cursor: 'pointer', background: 'none', border: 'none', padding: 0 }}>
+                      {u.username}
+                    </button>
+                  ) : (
+                    u.username
+                  )}
+                </td>
                 <td><span className={`badge badge-${u.role}`}>{u.role}</span></td>
                 <td>{new Date(u.created_at).toLocaleDateString()}</td>
                 <td>

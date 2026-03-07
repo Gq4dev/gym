@@ -3,6 +3,7 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import Navbar from './components/Navbar';
 import LoginPage from './pages/LoginPage';
 import UsersPage from './pages/admin/UsersPage';
+import UserDashboardPage from './pages/admin/UserDashboardPage';
 import CategoriesPage from './pages/admin/CategoriesPage';
 import ExercisesPage from './pages/admin/ExercisesPage';
 import RoutinesPage from './pages/admin/RoutinesPage';
@@ -37,8 +38,12 @@ function AppRoutes() {
           <Navbar />
           <div className="main-content">
             <Routes>
+              <Route path="/admin" element={<Navigate to="/admin/users" replace />} />
               <Route path="/admin/users" element={
                 <PrivateRoute adminOnly><UsersPage /></PrivateRoute>
+              } />
+              <Route path="/admin/users/:id" element={
+                <PrivateRoute adminOnly><UserDashboardPage /></PrivateRoute>
               } />
               <Route path="/admin/categories" element={
                 <PrivateRoute adminOnly><CategoriesPage /></PrivateRoute>
