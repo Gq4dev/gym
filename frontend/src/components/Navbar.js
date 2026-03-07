@@ -30,7 +30,10 @@ export default function Navbar() {
             <Link to="/admin/assignments">Asignaciones</Link>
           </>
         ) : (
-          <Link to="/my-routines">Mis Rutinas</Link>
+          <>
+            <Link to="/my-routines">Mis Rutinas</Link>
+            <Link to="/history">Historial</Link>
+          </>
         )}
       </div>
       <div className="navbar-user">

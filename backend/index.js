@@ -15,6 +15,7 @@ app.use('/api/exercises', require('./routes/exercises'));
 app.use('/api/routines', require('./routes/routines'));
 app.use('/api/assignments', require('./routes/assignments'));
 app.use('/api/my-routines', require('./routes/myRoutines'));
+app.use('/api/history', require('./routes/history'));
 
 // Middleware de autenticación por SEED_SECRET
 function checkSecret(req, res, next) {

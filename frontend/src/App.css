@@ -50,7 +50,7 @@ body {
 
 .navbar-links a:hover,
 .navbar-links a.active {
-  background: rgba(168,85,247,0.15);
+  background: rgba(168, 85, 247, 0.15);
   color: #a855f7;
 }
 
@@ -99,7 +99,7 @@ body {
   background: #fff;
   padding: 40px;
   border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(124,58,237,0.1);
+  box-shadow: 0 4px 24px rgba(124, 58, 237, 0.1);
   width: 340px;
   border: 1px solid #e8e4f0;
 }
@@ -171,7 +171,7 @@ body {
   background: #fff;
   padding: 24px;
   border-radius: 12px;
-  box-shadow: 0 1px 8px rgba(124,58,237,0.07);
+  box-shadow: 0 1px 8px rgba(124, 58, 237, 0.07);
   margin-bottom: 24px;
   max-width: 480px;
   border: 1px solid #e8e4f0;
@@ -296,7 +296,7 @@ body {
   background: #fff;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 1px 8px rgba(124,58,237,0.07);
+  box-shadow: 0 1px 8px rgba(124, 58, 237, 0.07);
   border: 1px solid #e8e4f0;
 }
 
@@ -364,7 +364,7 @@ body {
 .routine-card {
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0 1px 8px rgba(124,58,237,0.07);
+  box-shadow: 0 1px 8px rgba(124, 58, 237, 0.07);
   overflow: hidden;
   border: 1px solid #e8e4f0;
 }
@@ -511,14 +511,14 @@ body {
   background: #fff;
   border-radius: 12px;
   border: 1px solid #e8e4f0;
-  box-shadow: 0 1px 6px rgba(124,58,237,0.05);
+  box-shadow: 0 1px 6px rgba(124, 58, 237, 0.05);
   overflow: hidden;
   cursor: pointer;
   transition: box-shadow 0.2s;
 }
 
 .routine-card-mobile:hover {
-  box-shadow: 0 4px 16px rgba(124,58,237,0.12);
+  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.12);
 }
 
 .routine-card-mobile.overdue {
@@ -795,7 +795,7 @@ body {
   background: #fff;
   border-radius: 14px;
   padding: 16px;
-  box-shadow: 0 1px 6px rgba(124,58,237,0.06);
+  box-shadow: 0 1px 6px rgba(124, 58, 237, 0.06);
   border: 1px solid #e8e4f0;
   border-left: 3px solid #7c3aed;
   transition: opacity 0.2s, border-color 0.3s;
@@ -865,29 +865,33 @@ body {
 .video-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.75);
+  background: rgba(0, 0, 0, 0.75);
   display: flex;
-  align-items: center; /* cambiado de flex-end a center */
+  align-items: center;
+  /* cambiado de flex-end a center */
   justify-content: center;
   z-index: 100;
-  padding: 20px; /* para que no toque los bordes en pantallas completas */
+  padding: 20px;
+  /* para que no toque los bordes en pantallas completas */
 }
 
 .video-modal {
   background: #000;
   width: 100%;
   max-width: 480px;
-  border-radius: 12px; /* bordes más redondeados en todos lados en vez de solo arriba */
+  border-radius: 12px;
+  /* bordes más redondeados en todos lados en vez de solo arriba */
   overflow: hidden;
   position: relative;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.5); /* sombra para destacarlo */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  /* sombra para destacarlo */
 }
 
 .video-modal-close {
   position: absolute;
   top: 12px;
   right: 14px;
-  background: rgba(255,255,255,0.15);
+  background: rgba(255, 255, 255, 0.15);
   border: none;
   color: #fff;
   font-size: 1rem;
@@ -903,7 +907,8 @@ body {
 
 .video-modal-player {
   position: relative;
-  padding-top: 56.25%; /* 16:9 */
+  padding-top: 56.25%;
+  /* 16:9 */
 }
 
 .video-modal-player iframe {
@@ -968,7 +973,7 @@ body {
   border-color: #7c3aed;
   color: #7c3aed;
   cursor: pointer;
-  box-shadow: 0 0 0 3px rgba(124,58,237,0.15);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
 }
 
 .rep-circle.rep-next:active {
@@ -993,8 +998,15 @@ body {
 }
 
 @keyframes slideUp {
-  from { transform: translateY(8px); opacity: 0; }
-  to   { transform: translateY(0);   opacity: 1; }
+  from {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .wk-rest-label {
@@ -1055,7 +1067,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 30px rgba(124,58,237,0.3);
+  box-shadow: 0 0 30px rgba(124, 58, 237, 0.3);
 }
 
 .workout-done h2 {
@@ -1091,4 +1103,13 @@ body {
   font-size: 1.2rem;
   letter-spacing: 3px;
   background: #f8f7ff;
+}
+
+/* Sweet alert custom emoji icon styling */
+.no-border-icon {
+  border: none !important;
+  font-size: 3rem !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 15px auto 0 !important;
 }

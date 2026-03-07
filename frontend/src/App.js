@@ -9,6 +9,7 @@ import RoutinesPage from './pages/admin/RoutinesPage';
 import AssignmentsPage from './pages/admin/AssignmentsPage';
 import MyRoutinesPage from './pages/user/MyRoutinesPage';
 import WorkoutPage from './pages/user/WorkoutPage';
+import HistoryPage from './pages/user/HistoryPage';
 import './App.css';
 
 function PrivateRoute({ children, adminOnly = false }) {
@@ -26,6 +27,9 @@ function AppRoutes() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/workout/:id" element={
         <PrivateRoute><WorkoutPage /></PrivateRoute>
+      } />
+      <Route path="/history" element={
+        <PrivateRoute><HistoryPage /></PrivateRoute>
       } />
 
       <Route path="*" element={

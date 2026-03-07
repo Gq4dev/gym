@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from '../../api/api';
+import Swal from 'sweetalert2';
 
 function formatTime(secs) {
   const m = Math.floor(secs / 60).toString().padStart(2, '0');
@@ -20,6 +21,8 @@ function toEmbedUrl(url) {
   return url;
 }
 
+
+
 export default function WorkoutPage() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -33,25 +36,58 @@ export default function WorkoutPage() {
   const [restState, setRestState] = useState(null);
   const [elapsed, setElapsed] = useState(0);
   const [isDone, setIsDone] = useState(false);
-  const [videoUrl, setVideoUrl] = useState(null); // URL del modal de video
+  const [videoUrl, setVideoUrl] = useState(null);
 
   const restTimerRef = useRef(null);
   const elapsedTimerRef = useRef(null);
   const startTimeRef = useRef(null);
+  const initialLoadDone = useRef(false);
+
+  // Clave de guardado para esta rutina en particular
+  const storageKey = `gym_routine_progress_${id}`;
 
   useEffect(() => {
     api.get('/my-routines')
       .then(res => {
         const found = res.data.find(a => a.id === Number(id));
         if (!found) { setError('Rutina no encontrada'); return; }
+
         setRoutineTitle(found.routine_title);
         const exs = found.exercises || [];
         setExercises(exs);
-        setDoneSets(new Array(exs.length).fill(0));
-        startTimeRef.current = Date.now();
-        elapsedTimerRef.current = setInterval(() => {
-          setElapsed(Math.floor((Date.now() - startTimeRef.current) / 1000));
-        }, 1000);
+
+        // Recuperar progreso si existe
+        let initialSets = new Array(exs.length).fill(0);
+        let initialElapsed = 0;
+        let initialIsDone = false;
+        const savedProgress = localStorage.getItem(storageKey);
+
+        if (savedProgress) {
+          try {
+            const parsed = JSON.parse(savedProgress);
+            if (parsed.doneSets?.length === exs.length) {
+              initialSets = parsed.doneSets;
+              initialElapsed = parsed.elapsed || 0;
+              initialIsDone = parsed.isDone || false;
+            }
+          } catch (e) {
+            console.error('Error parseando progreso guardado', e);
+          }
+        }
+
+        setDoneSets(initialSets);
+        setElapsed(initialElapsed);
+        setIsDone(initialIsDone);
+
+        // Guardar referencia de tiempo para el reloj contando el recuperado
+        if (!initialIsDone) {
+          startTimeRef.current = Date.now() - (initialElapsed * 1000);
+          elapsedTimerRef.current = setInterval(() => {
+            setElapsed(Math.floor((Date.now() - startTimeRef.current) / 1000));
+          }, 1000);
+        }
+
+        initialLoadDone.current = true;
       })
       .catch(() => setError('Error al cargar rutina'))
       .finally(() => setLoading(false));
@@ -60,7 +96,18 @@ export default function WorkoutPage() {
       clearInterval(elapsedTimerRef.current);
       clearTimeout(restTimerRef.current);
     };
-  }, [id]);
+  }, [id, storageKey]);
+
+  // Guardar estado cada vez que se modifique después del load inicial
+  useEffect(() => {
+    if (!initialLoadDone.current || exercises.length === 0) return;
+
+    localStorage.setItem(storageKey, JSON.stringify({
+      doneSets,
+      elapsed,
+      isDone
+    }));
+  }, [doneSets, elapsed, isDone, exercises.length, storageKey]);
 
   useEffect(() => {
     if (!restState || restState.timeLeft <= 0) return;
@@ -87,15 +134,59 @@ export default function WorkoutPage() {
     }
 
     const allDone = exercises.every((e, i) => next[i] >= (e.sets || 1));
-    if (allDone) {
+    if (allDone && !isDone) {
       clearInterval(elapsedTimerRef.current);
       setIsDone(true);
+      setRestState(null); // Quitar descansos pendientes
+
+      // Save to history
+      const exerciseDataSnapshot = exercises.map((e, i) => ({
+        ...e,
+        completed_sets: next[i],
+        time_elapsed_seconds: elapsed
+      }));
+
+      api.post('/history', {
+        routine_id: id,
+        exercise_data: exerciseDataSnapshot
+      }).catch(err => console.error('Error saving workout to history', err));
+
+      Swal.fire({
+        title: '¡Perfecto!',
+        text: '¡Muy buen entrenamiento!',
+        iconHtml: '💪', /* Cambiado a un emoji de bíceps */
+        customClass: {
+          icon: 'no-border-icon' /* Puedes añadir una clase si quieres quitar el borde estándar del iconHtml más adelante */
+        },
+        confirmButtonText: 'Genial',
+        confirmButtonColor: '#7c3aed',
+        background: '#fff',
+        color: '#1a1a2e',
+        timer: 3000,
+        timerProgressBar: true
+      });
     }
-  }, [exercises, doneSets, restState]);
+  }, [exercises, doneSets, restState, isDone, elapsed, id]);
 
   const skipRest = () => {
     clearTimeout(restTimerRef.current);
     setRestState(null);
+  };
+
+  const handleRestart = () => {
+    if (window.confirm('¿Estás seguro de que quieres reiniciar toda la rutina? Perderás el progreso actual.')) {
+      setDoneSets(new Array(exercises.length).fill(0));
+      setElapsed(0);
+      setIsDone(false);
+      setRestState(null);
+      localStorage.removeItem(storageKey);
+
+      clearInterval(elapsedTimerRef.current);
+      startTimeRef.current = Date.now();
+      elapsedTimerRef.current = setInterval(() => {
+        setElapsed(Math.floor((Date.now() - startTimeRef.current) / 1000));
+      }, 1000);
+    }
   };
 
   const completedCount = exercises.filter((ex, i) => (doneSets[i] || 0) >= (ex.sets || 1)).length;
@@ -117,9 +208,22 @@ export default function WorkoutPage() {
         <h2>Rutina completada</h2>
         <p>{routineTitle}</p>
         <p className="workout-done-time">{formatTime(elapsed)}</p>
-        <button className="btn-primary btn-full" onClick={() => navigate('/my-routines')}>
-          Volver a mis rutinas
-        </button>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%' }}>
+          <button className="btn-primary btn-full" onClick={() => navigate('/my-routines')}>
+            Volver a mis rutinas
+          </button>
+          <button
+            onClick={handleRestart}
+            style={{
+              background: 'transparent', border: '1px solid #ddd8f0', color: '#7c3aed',
+              padding: '12px', borderRadius: '12px', fontFamily: '"Bebas Neue", sans-serif',
+              fontSize: '1.2rem', letterSpacing: '2px', cursor: 'pointer'
+            }}
+          >
+            REINICIAR RUTINA
+          </button>
+        </div>
       </div>
     );
   }
@@ -130,7 +234,19 @@ export default function WorkoutPage() {
       <div className="workout-header">
         <div className="workout-header-top">
           <button className="workout-back" onClick={() => navigate('/my-routines')}>← VOLVER</button>
-          <div className="workout-elapsed-pill">{formatTime(elapsed)}</div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            {completedCount > 0 && (
+              <button
+                className="workout-back"
+                onClick={handleRestart}
+                style={{ color: '#dc3545', borderColor: '#f8d7da', background: '#fff' }}
+              >
+                ⟲ REINICIAR
+              </button>
+            )}
+            <div className="workout-elapsed-pill">{formatTime(elapsed)}</div>
+          </div>
         </div>
         <div className="workout-header-body">
           <div className="workout-header-info">
