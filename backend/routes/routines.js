@@ -18,7 +18,7 @@ async function attachExercises(routines) {
 // GET /api/routines
 router.get('/', async (req, res) => {
   try {
-    const routines = await db('routines').select('*').orderBy('title');
+    const routines = await db('routines').where({ is_generic: true }).select('*').orderBy('title');
     res.json(await attachExercises(routines));
   } catch {
     res.status(500).json({ message: 'Error al obtener rutinas' });
@@ -30,9 +30,9 @@ router.post('/', async (req, res) => {
   const { title, notes } = req.body;
   if (!title) return res.status(400).json({ message: 'titulo requerido' });
   try {
-    const result = await db('routines').insert({ title, notes: notes || null }).returning('id');
+    const result = await db('routines').insert({ title, notes: notes || null, is_generic: true }).returning('id');
     const newId = result[0]?.id || result[0];
-    res.status(201).json({ id: newId, title, notes, exercises: [] });
+    res.status(201).json({ id: newId, title, notes, is_generic: true, exercises: [] });
   } catch (err) {
     console.error('Error al crear rutina:', err);
     res.status(500).json({ message: 'Error al crear rutina' });
