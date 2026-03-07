@@ -11,6 +11,9 @@ export default function UserDashboardPage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    // Modal State
+    const [selectedAssignment, setSelectedAssignment] = useState(null);
+
     // Routine Builder State
     const [showBuilder, setShowBuilder] = useState(false);
     const [saving, setSaving] = useState(false);
@@ -58,6 +61,10 @@ export default function UserDashboardPage() {
         } catch {
             console.error('Error fetching generic routines');
         }
+    };
+
+    const getExerciseName = (id) => {
+        return availableExercises.find(e => e.id === id)?.name || `Destino #${id}`;
     };
 
     useEffect(() => {
@@ -383,7 +390,7 @@ export default function UserDashboardPage() {
                                                     {item.routine?.notes ? (item.routine.notes.length > 30 ? item.routine.notes.substring(0, 30) + '...' : item.routine.notes) : '-'}
                                                 </td>
                                                 <td style={{ textAlign: 'right' }}>
-                                                    <button className="btn-primary btn-sm" onClick={() => navigate('/admin/routines')}>
+                                                    <button className="btn-primary btn-sm" onClick={() => setSelectedAssignment(item)}>
                                                         Ver Detalles
                                                     </button>
                                                 </td>
@@ -394,6 +401,54 @@ export default function UserDashboardPage() {
                             </div>
                         </div>
                     ))}
+                </div>
+            )}
+
+            {/* ROUTINE DETAILS MODAL */}
+            {selectedAssignment && (
+                <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(15, 23, 42, 0.6)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
+                    <div style={{ background: '#fff', padding: '40px', borderRadius: '16px', width: '90%', maxWidth: '750px', maxHeight: '90vh', overflowY: 'auto', boxShadow: '0 20px 40px rgba(0,0,0,0.15)' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '25px' }}>
+                            <div>
+                                <h2 style={{ margin: '0 0 10px 0', fontSize: '2rem', color: '#1e293b' }}>{selectedAssignment.routine?.title}</h2>
+                                {selectedAssignment.routine?.notes && (
+                                    <p style={{ margin: 0, color: '#64748b', fontSize: '1.1rem', background: '#f8fafc', padding: '15px', borderRadius: '8px', borderLeft: '4px solid #7c3aed' }}>
+                                        {selectedAssignment.routine.notes}
+                                    </p>
+                                )}
+                            </div>
+                            <button onClick={() => setSelectedAssignment(null)} className="btn-secondary" style={{ padding: '8px 16px', background: '#e2e8f0', border: 'none' }}>✕ Cerrar</button>
+                        </div>
+
+                        <h3 style={{ color: '#334155', borderBottom: '2px solid #e2e8f0', paddingBottom: '10px', marginBottom: '20px' }}>Ejercicios</h3>
+                        {selectedAssignment.routine?.exercises?.length === 0 ? (
+                            <p style={{ color: '#64748b' }}>No hay ejercicios registrados en esta rutina.</p>
+                        ) : (
+                            <table className="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Ejercicio</th>
+                                        <th>Series</th>
+                                        <th>Reps</th>
+                                        <th>Tiempo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {selectedAssignment.routine?.exercises?.map((ex, i) => (
+                                        <tr key={i}>
+                                            <td style={{ fontWeight: 'bold' }}>{getExerciseName(ex.exercise_id)}</td>
+                                            <td>{ex.sets || '-'}</td>
+                                            <td>{ex.reps || '-'}</td>
+                                            <td>{ex.duration ? `${ex.duration}s` : '-'}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        )}
+                        <div style={{ marginTop: '30px', textAlign: 'right' }}>
+                            <button className="btn-primary" onClick={() => setSelectedAssignment(null)}>Cerrar Detalles</button>
+                        </div>
+                    </div>
                 </div>
             )}
         </div>
